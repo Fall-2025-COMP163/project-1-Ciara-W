@@ -32,7 +32,22 @@ def create_character(name, character_class):
     pass
 
 def calculate_stats(character_class, level):
-    
+       if character_class == "warrior":
+        strength = 5 + level * 3
+        magic = 10 + level
+        health = 20 + level * 2
+    elif character_class == "mages":
+        strength = 3 + level
+        magic = 15 + level * 3
+        health = 15 + level * 3
+    elif character_class == "rogues":
+        strength = 3 + level * 2
+        magic = 12 + level
+        health = 15 + level * 3
+    elif character_class == "clerics":
+        strength = 4 + level 
+        magic = 15 + level 
+        health = 15 + level * 4
     """
     Calculates base stats based on class and level
     Returns: tuple of (strength, magic, health)
