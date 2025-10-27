@@ -12,14 +12,13 @@ Example: AI helped with file I/O error handling logic in save_character function
     Creates a new character dictionary with calculated stats.
     Returns: dictionary with keys: name, class, level, strength, magic, health, gold
     """
-    # Default starting values
     level = 1
     gold = 100
 
-    # Use calculate_stats() to get the stat values
+    # Use calculate_stats() to get stats
     strength, magic, health = calculate_stats(character_class, level)
 
-    # Return the character dictionary
+    # Return character dictionary with exact key names
     return {
         "name": name,
         "class": character_class,
@@ -53,6 +52,7 @@ def calculate_stats(character_class, level):
 
     return strength, magic, health
 
+
     """
     Calculates base stats based on class and level
     Returns: tuple of (strength, magic, health)
@@ -65,7 +65,7 @@ def calculate_stats(character_class, level):
     """
     # TODO: Implement this function
     # Return a tuple: (strength, magic, health)
-    pass
+
 
 def save_character(character, filename):
     """
