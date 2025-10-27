@@ -12,6 +12,8 @@ def create_character(name, character_class):
     character_class = input("Enter Class:")
     level = int(input("Enter level"))
     gold = int(input("Enter Gold:"))
+    
+    strength, magic, health = calculate_stats(character_class, level)
 
     char = {
         "Name" : name,
@@ -23,6 +25,8 @@ def create_character(name, character_class):
         "Strength" : strength
         
     }
+
+    return char
     """
     Creates a new character dictionary with calculated stats
     Returns: dictionary with keys: name, class, level, strength, magic, health, gold
