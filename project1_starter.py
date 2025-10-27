@@ -12,7 +12,7 @@ Example: AI helped with file I/O error handling logic in save_character function
     Creates a new character dictionary with calculated stats.
     Returns: dictionary with keys: name, class, level, strength, magic, health, gold
     """
-    # Default starting values (these may be set by the grader)
+    # Default starting values
     level = 1
     gold = 100
 
@@ -30,14 +30,6 @@ Example: AI helped with file I/O error handling logic in save_character function
         "gold": gold
     }
 
-    return char
-    """
-    Creates a new character dictionary with calculated stats
-    Returns: dictionary with keys: name, class, level, strength, magic, health, gold
-    
-    # TODO: Implement this function
-    # Remember to use calculate_stats() function for stat calculation"""
-    pass
 
 def calculate_stats(character_class, level):
     if character_class == "warrior":
