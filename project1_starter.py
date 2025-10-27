@@ -7,7 +7,7 @@ AI Usage: [Document any AI assistance used]
 Example: AI helped with file I/O error handling logic in save_character function
 """
 
-    def create_character(name, character_class):
+def create_character(name, character_class):
     """
     Creates a new character dictionary with calculated stats.
     Returns: dictionary with keys: name, class, level, strength, magic, health, gold
