@@ -29,8 +29,9 @@ def create_character(name, character_class):
         "gold": gold
     }
 
-
 def calculate_stats(character_class, level):
+    character_class = character_class.lower()  # ✅ makes it case-insensitive
+
     if character_class == "warrior":
         strength = 5 + level * 3
         magic = 10 + level
@@ -51,6 +52,7 @@ def calculate_stats(character_class, level):
         strength = magic = health = 0
 
     return strength, magic, health
+
 
 
     """
