@@ -75,7 +75,13 @@ def save_character(character, filename):
     Saves character to text file in specific format
     Returns: True if successful
     """
+    import os
+
     if not isinstance(character, dict) or not filename:
+        return False
+
+    directory = os.path.dirname(filename)
+    if directory and not os.path.exists(directory):
         return False
 
     file = open(filename, "w")
@@ -96,7 +102,9 @@ def load_character(filename):
     Loads character from text file
     Returns: character dictionary if successful
     """
-
+    import os
+    if not os.path.exists(filename):
+        return turn
     file = open(filename, "r")
     lines = file.readlines()
     file.close()
