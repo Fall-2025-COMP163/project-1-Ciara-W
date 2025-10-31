@@ -1,21 +1,23 @@
 """
-COMP 163 - Project 1: Character Creator & Saving/Loading
+COMP 163 - Project 1: Character Creator
 Name: Ciara Weldon
 Date: 10-22-2025
 
-AI Usage: [Document any AI assistance used]
-Example: AI helped with file I/O error handling logic in save_character function
+AI Usage:
+AI helped correct formatting and logic in load_character and display_character functions,
+and assisted cleaning comments.
 """
+
 
 def create_character(name, character_class):
     """
     Creates a new character dictionary with calculated stats.
     Returns: dictionary with keys: name, class, level, strength, magic, health, gold
     """
-    level = 1
-    gold = 100
+    level = 1  # default starting level
+    gold = 100  # default starting gold
 
-    # Use calculate_stats() to get stats
+    # Use calculate_stats() to get stats based on class & level
     strength, magic, health = calculate_stats(character_class, level)
 
     # Return character dictionary with exact key names
@@ -31,8 +33,20 @@ def create_character(name, character_class):
 
 
 def calculate_stats(character_class, level):
-    character_class = character_class.lower()
+    """
+    Calculates base stats based on class and level
+    Returns: tuple of (strength, magic, health)
 
+    Design your own formulas! Ideas:
+    - Warriors: High strength, low magic, high health
+    - Mages: Low strength, high magic, medium health
+    - Rogues: Medium strength, medium magic, low health
+    - Clerics: Medium strength, high magic, high health
+    """
+
+    character_class = character_class.lower()  # make class lowercase so matching works
+
+    # stat formulas for each class
     if character_class == "warrior":
         strength = 5 + level * 3
         magic = 10 + level
@@ -50,79 +64,75 @@ def calculate_stats(character_class, level):
         magic = 15 + level
         health = 15 + level * 4
     else:
-        strength = magic = health = 0
+        strength = magic = health = 0  # invalid class case
 
     return strength, magic, health
 
 
-
-
+def save_character(character, filename):
     """
-    Calculates base stats based on class and level
-    Returns: tuple of (strength, magic, health)
-    
-    Design your own formulas! Ideas:
-    - Warriors: High strength, low magic, high health
-    - Mages: Low strength, high magic, medium health  
-    - Rogues: Medium strength, medium magic, low health
-    - Clerics: Medium strength, high magic, high health
+    Saves character to text file in specific format
+    Returns: True if successful
     """
-    # TODO: Implement this function
-    # Return a tuple: (strength, magic, health)
+    file = open(filename, "w")  # saves the character by writing the file
+    file.write(f"Character Name: {character['name']}\n")
+    file.write(f"Class: {character['class']}\n")
+    file.write(f"Level: {character['level']}\n")
+    file.write(f"Strength: {character['strength']}\n")
+    file.write(f"Magic: {character['magic']}\n")
+    file.write(f"Health: {character['health']}\n")
+    file.write(f"Gold: {character['gold']}\n")
+    file.close()
+    return True
+
 
 def load_character(filename):
+    """
+    Loads character from text file
+    Returns: character dictionary if successful
+    """
 
-"""
-Used AI here to help update the dictionary
-"""
-    file = open(filename, "r")     # open file
-    lines = file.readlines()       # read all lines
-    file.close()                   # close file
+    file = open(filename, "r")  # open file
+    lines = file.readlines()  # read all lines
+    file.close()  # close file
 
     character = {}
 
+    # split each line into key and value
     for line in lines:
-        key, value = line.strip().split(":")   #
-        character[key] = value
+        line = line.strip()  # remove \n
+        key, value = line.split(": ")  # split into key and value
+
+        # match dictionary key names to file labels
+        if key == "Character Name":
+            character["name"] = value
+        else:
+            # match dictionary key names to the file labels
+            real_key = key.lower()
+
+            # convert numbers to int
+            if real_key in ["level", "strength", "magic", "health", "gold"]:
+                character[real_key] = int(value)
+            else:
+                character[real_key] = value
 
     return character
-    """
-    Loads character from text file
-    Returns: character dictionary if successful, None if file not found
-    """
-
-
-    # TODO: Implement this function
-    # Remember to handle file not found errors
-    pass
 
 
 def display_character(character):
     """
     Prints formatted character sheet
     Returns: None (prints to console)
-
-    Example output:
-    === CHARACTER SHEET ===
-    Name: Aria
-    Class: Mage
-    Level: 1
-    Strength: 5
-    Magic: 15
-    Health: 80
-    Gold: 100
     """
-        print("=== CHARACTER SHEET ===")  #prints the character info
-        print(f"Name: {character['name']}")
-        print(f"Class: {character['class']}")
-        print(f"Level: {character['level']}")
-        print(f"Strength: {character['strength']}")
-        print(f"Magic: {character['magic']}")
-        print(f"Health: {character['health']}")
-        print(f"Gold: {character['gold']}")
 
-    # TODO: Implement this function
-    pass
+    print("=== CHARACTER SHEET ===")  # prints the character info
+    print(f"Name: {character['name']}")
+    print(f"Class: {character['class']}")
+    print(f"Level: {character['level']}")
+    print(f"Strength: {character['strength']}")
+    print(f"Magic: {character['magic']}")
+    print(f"Health: {character['health']}")
+    print(f"Gold: {character['gold']}")
 
 
 def level_up(character):
@@ -131,7 +141,8 @@ def level_up(character):
     Modifies the character dictionary directly
     Returns: None
     """
-    character["level"] += 1
+
+    character["level"] += 1  # increase level by 1
 
     # Recalculate stats using the updated level
     strength, magic, health = calculate_stats(character["class"], character["level"])
@@ -139,23 +150,19 @@ def level_up(character):
     character["magic"] = magic
     character["health"] = health
 
-    print(f"{character['name']} leveled up and is now {character['level']}!")
+    print(f"{character['name']} leveled up and is now level {character['level']}!")
     print(f"New stats - Strength: {strength}, Magic: {magic}, Health: {health}")
 
-    # TODO: Implement this function
-    # Remember to recalculate stats for the new level
-    pass
 
 # Main program area (optional - for testing your functions)
 if __name__ == "__main__":
     print("=== CHARACTER CREATOR ===")
     print("Test your functions here!")
-    
-    # Example usage:
-    # char = create_character("TestHero", "Warrior")
+
+    # Example usage (uncomment to test):
+    # char = create_character("Aria", "Mage")
     # display_character(char)
     # save_character(char, "my_character.txt")
     # loaded = load_character("my_character.txt")
-
-
-
+    # display_character(loaded)
+    # level_up(loaded)
