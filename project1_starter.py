@@ -69,20 +69,16 @@ def calculate_stats(character_class, level):
     return strength, magic, health
 
 
+
 def save_character(character, filename):
-     import os
-    
-    if not isinstance(character, dict) or not filename:
-        return False
-    
-    directory = os.path.dirname(filename)
-    if directory and not os.path.exists(directory):
-        return False
     """
     Saves character to text file in specific format
     Returns: True if successful
     """
-    file = open(filename, "w")  # saves the character by writing the file
+    if not isinstance(character, dict) or not filename:
+        return False
+
+    file = open(filename, "w")
     file.write(f"Character Name: {character['name']}\n")
     file.write(f"Class: {character['class']}\n")
     file.write(f"Level: {character['level']}\n")
@@ -91,6 +87,7 @@ def save_character(character, filename):
     file.write(f"Health: {character['health']}\n")
     file.write(f"Gold: {character['gold']}\n")
     file.close()
+
     return True
 
 
@@ -100,31 +97,27 @@ def load_character(filename):
     Returns: character dictionary if successful
     """
 
-    file = open(filename, "r")  # open file
-    lines = file.readlines()  # read all lines
-    file.close()  # close file
+    file = open(filename, "r")
+    lines = file.readlines()
+    file.close()
 
     character = {}
 
-    # split each line into key and value
     for line in lines:
-        line = line.strip()  # remove \n
-        key, value = line.split(": ")  # split into key and value
+        line = line.strip()
+        key, value = line.split(": ")
 
-        # match dictionary key names to file labels
         if key == "Character Name":
             character["name"] = value
         else:
-            # match dictionary key names to the file labels
             real_key = key.lower()
-
-            # convert numbers to int
             if real_key in ["level", "strength", "magic", "health", "gold"]:
                 character[real_key] = int(value)
             else:
                 character[real_key] = value
 
     return character
+
 
 
 def display_character(character):
@@ -174,3 +167,4 @@ if __name__ == "__main__":
     # loaded = load_character("my_character.txt")
     # display_character(loaded)
     # level_up(loaded)
+
