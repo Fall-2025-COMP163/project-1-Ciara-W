@@ -70,6 +70,14 @@ def calculate_stats(character_class, level):
 
 
 def save_character(character, filename):
+     import os
+    
+    if not isinstance(character, dict) or not filename:
+        return False
+    
+    directory = os.path.dirname(filename)
+    if directory and not os.path.exists(directory):
+        return False
     """
     Saves character to text file in specific format
     Returns: True if successful
