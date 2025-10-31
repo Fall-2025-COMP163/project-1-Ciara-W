@@ -104,7 +104,7 @@ def load_character(filename):
     """
     import os
     if not os.path.exists(filename):
-        return True
+        return None
     file = open(filename, "r")
     lines = file.readlines()
     file.close()
@@ -175,4 +175,5 @@ if __name__ == "__main__":
     # loaded = load_character("my_character.txt")
     # display_character(loaded)
     # level_up(loaded)
+
 
