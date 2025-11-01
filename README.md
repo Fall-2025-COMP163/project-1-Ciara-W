@@ -1,6 +1,13 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/JTXl4WMa)
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=21236164&assignment_repo_type=AssignmentRepo)
 # COMP 163 - Project 1: Character Creator & Chronicles
+This is a fighting game between four possible characters. The objective is to level up so you can have better chances of winning.
+I chose my stats because there will bee some characters with greater abilities than the other one which will make it interesting.
+I used AI to help me save the characters because there would be errors that keep popping up which wouldn't make the test cases pass.
+
+
+
+
 # 🎯 Project Overview
 
 Build a text-based RPG character creation and story progression system that demonstrates mastery of functions and file I/O operations.
